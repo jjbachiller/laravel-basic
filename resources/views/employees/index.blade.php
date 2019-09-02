@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Companies</div>
+                <div class="card-header">Employees</div>
 
                 <div class="card-body">
 
@@ -18,7 +18,7 @@
                     </div>
 
                     <div>
-                        <a style="margin: 19px;" href="{{ route('companies.create') }}" class="btn btn-primary">New company</a>
+                        <a style="margin: 19px;" href="{{ route('employees.create') }}" class="btn btn-primary">New employee</a>
                     </div>
 
                     <table class="table table-striped">
@@ -26,10 +26,11 @@
                         <thead>
                             <tr>
                                 <td>ID</td>
-                                <td>Name</td>
+                                <td>Firstname</td>
+                                <td>Lastname</td>
+                                <td>Company</td>
                                 <td>Email</td>
-                                <td>Logo</td>
-                                <td>Website</td>
+                                <td>Phone</td>
 
                                 <td colspan="2">Actions</td>
                             </tr>
@@ -37,20 +38,21 @@
 
                         <tbody>
 
-                            @foreach ($companies as $company)
+                            @foreach ($employees as $employee)
 
                                 <tr>
-                                    <td>{{ $company->id }}</td>
-                                    <td>{{ $company->name }}</td>
-                                    <td>{{ $company->email }}</td>
-                                    <td>{{ $company->logo }}</td>
-                                    <td>{{ $company->website }}</td>
+                                    <td>{{ $employee->id }}</td>
+                                    <td>{{ $employee->firstname }}</td>
+                                    <td>{{ $employee->lastname }}</td>
+                                    <td> - </td>
+                                    <td>{{ $employee->email }}</td>
+                                    <td>{{ $employee->phone }}</td>
 
                                     <td>
-                                        <a href="{{ route('companies.edit', $company->id) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
-                                        {{ Form::open(array('route' => array('companies.destroy', $company->id), 'method' => 'delete')) }}
+                                        {{ Form::open(array('route' => array('employees.destroy', $employee->id), 'method' => 'delete')) }}
 
                                             {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
 

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Companies</div>
+                <div class="card-header">Employees</div>
 
                 <div class="card-body">
 
@@ -24,7 +24,36 @@
                         </div><br />
                     @endif
 
-                    <!-- {{ Form::model($employee, array('route' => array('employee.create'))) }} -->
+                    {{ Form::open(array('route' => 'employees.store', 'files' => true)) }}
+
+                        <div class="form-group">
+                            {!! Form::label('firstname', 'Firstname') !!}
+                            {!! Form::text('firstname', null, array('class' => 'form-control')) !!}
+                        </div>
+
+                        <div class="form-group">
+                            {{ Form::label('lastname', 'Lastname') }}
+                            {{ Form::text('lastname', null, array('class' => 'form-control')) }}
+                         </div>
+
+                         <div class="form-group">
+                             <span>-- Dropdown companies or hidden with the preselected company id? --</span>
+                         </div>
+
+                         <div class="form-group">
+                             {{ Form::label('email', 'Email') }}
+                             {{ Form::email('email', null, array('class' => 'form-control')) }}
+                         </div>
+
+                         <div class="form-group">
+                             {{ Form::label('phone', 'Phone') }}
+                             {{ Form::text('phone', null, array('class' => 'form-control')) }}
+                         </div>
+
+                         {{ Form::submit('Add employee') }}
+
+                    {{ Form::close() }}
+
 
                 </div>
             </div>

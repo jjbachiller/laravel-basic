@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Employee;
 
 class EmployeeController extends Controller
 {
@@ -21,7 +22,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees = Employee::all();
+        return view('employees.index', compact('employees'));
     }
 
     /**
@@ -42,7 +44,24 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+          'firstname' => 'required',
+          'lastname' => 'required',
+          'email' => 'email'
+      ]);
+
+      // Añadir validación de email único.
+
+      $employee = new Employee([
+          'firstname' => $request->get('firstname'),
+          'lastname' => $request->get('lastname'),
+          'email' => $request->get('email'),
+          'phone' => $request->get('phone'),
+      ]);
+
+      $employee->save();
+
+      return redirect('/employee')->with('success', 'Employee saved!');
     }
 
     /**
