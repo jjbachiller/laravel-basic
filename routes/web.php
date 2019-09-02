@@ -17,7 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'CompanyController@index')->name('home');
 // Route::get('/logout', 'Auth\LoginController@logout');
-Route::resource('companies', 'CompanyController');
-Route::resource('employees', 'EmployeeController');
+Route::resources([
+    'companies' => 'CompanyController',
+    'employees' => 'EmployeeController'
+]);
+// Route::resource('employees', 'EmployeeController');

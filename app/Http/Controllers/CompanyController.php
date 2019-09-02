@@ -62,7 +62,7 @@ class CompanyController extends Controller
 
         $company->save();
 
-        return redirect('/companies')->with('success', 'Company saved!');
+        return redirect('home')->with('success', 'Company saved!');
     }
 
     /**
@@ -73,7 +73,9 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        //
+        $company = Company::find($id);
+
+        return view('companies.show', compact('company'));
     }
 
     /**
@@ -110,7 +112,7 @@ class CompanyController extends Controller
         $company->website = $request->get('website');
         $company->save();
 
-        return redirect('/companies')->with('success', 'Companies updated!');
+        return redirect('home')->with('success', 'Companies updated!');
     }
 
     /**
@@ -124,6 +126,6 @@ class CompanyController extends Controller
         $company = Company::find($id);
         $company->delete();
 
-        return redirect('/companies')->with('succes', 'Company deleted!');
+        return redirect('home')->with('succes', 'Company deleted!');
     }
 }
