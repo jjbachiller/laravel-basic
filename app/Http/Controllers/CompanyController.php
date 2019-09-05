@@ -56,9 +56,14 @@ class CompanyController extends Controller
         $company = new Company([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
-            'logo' => $request->get('logo'),
             'website' => $request->get('website')
         ]);
+
+        $logo = $request->file('logo');
+        if (!is_null($logo))
+        {
+          $company->logo = $logo->store(null, 'logos');
+        }
 
         $company->save();
 
@@ -106,10 +111,17 @@ class CompanyController extends Controller
         ]);
 
         $company = Company::find($id);
+
         $company->name = $request->get('name');
         $company->email = $request->get('email');
-        $company->logo = $request->get('logo');
         $company->website = $request->get('website');
+
+        $logo = $request->file('logo');
+        if (!is_null($logo))
+        {
+          $company->logo = $logo->store(null, 'logos');
+        }
+
         $company->save();
 
         return redirect('home')->with('success', 'Companies updated!');

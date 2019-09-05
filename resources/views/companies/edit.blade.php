@@ -26,7 +26,7 @@
                     @endif
 
                     <!-- {{ Form::open(array('route' => array('companies.update', $company->id), 'files' => true)) }} -->
-                    {{ Form::model($company, array('route' => array('companies.update', $company->id), 'method' => 'put')) }}
+                    {{ Form::model($company, array('route' => array('companies.update', $company->id), 'method' => 'put', 'files' => true)) }}
 
                         <div class="form-group">
                             {!! Form::label('name', 'Name') !!}

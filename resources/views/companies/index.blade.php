@@ -43,7 +43,11 @@
                                     <td>{{ $company->id }}</td>
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->email }}</td>
-                                    <td>{{ $company->logo }}</td>
+                                    <td>
+                                        @if (!is_null($company->logo))
+                                          <img height="100px" src="{{ asset(Storage::disk('logos')->url($company->logo)) }}"/>
+                                        @endif
+                                    </td>
                                     <td>{{ $company->website }}</td>
 
                                     <td>
