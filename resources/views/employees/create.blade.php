@@ -5,13 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Employees</div>
+                <div class="card-header">New employee of {{ $company->name }}</div>
 
                 <div class="card-body">
 
                     <div class="row">
                         <div class="col-sm-8 offset-sm-2">
-                            <h3 class="display-4">Add an employee</h3>
+                            <h3 class="display-4">Add an employee to {{ $company->name }}</h3>
                         </div>
                     </div>
                     @if ($errors->any())
@@ -25,6 +25,7 @@
                     @endif
 
                     {{ Form::open(array('route' => 'employees.store', 'files' => true)) }}
+                        {{ Form::hidden('company', $company->id) }}
 
                         <div class="form-group">
                             {!! Form::label('firstname', 'Firstname') !!}
@@ -34,10 +35,6 @@
                         <div class="form-group">
                             {{ Form::label('lastname', 'Lastname') }}
                             {{ Form::text('lastname', null, array('class' => 'form-control')) }}
-                         </div>
-
-                         <div class="form-group">
-                             <span>-- Dropdown companies or hidden with the preselected company id? --</span>
                          </div>
 
                          <div class="form-group">

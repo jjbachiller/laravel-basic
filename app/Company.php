@@ -14,4 +14,8 @@ class Company extends Model
             'website'
     ];
 
+    public function employees()
+    {
+        return $this->hasMany('App\Employee', 'company');
+    }
 }

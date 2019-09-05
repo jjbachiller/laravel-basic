@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Companies</div>
 
@@ -41,11 +41,13 @@
 
                                 <tr>
                                     <td>{{ $company->id }}</td>
-                                    <td>{{ $company->name }}</td>
+                                    <td>
+                                        <a href="{{ route('companies.show', $company->id) }}">{{ $company->name }}</a>
+                                    </td>
                                     <td>{{ $company->email }}</td>
                                     <td>
                                         @if (!is_null($company->logo))
-                                          <img height="100px" src="{{ asset(Storage::disk('logos')->url($company->logo)) }}"/>
+                                          <img width="100px" src="{{ asset(Storage::disk('logos')->url($company->logo)) }}"/>
                                         @endif
                                     </td>
                                     <td>{{ $company->website }}</td>

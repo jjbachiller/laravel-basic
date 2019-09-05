@@ -177,6 +177,8 @@ return [
 
         // Form HTML shorts for blade
         Collective\Html\HtmlServiceProvider::class,
+        // Debugbar
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -228,8 +230,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        // Form HTML shorts for blade
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        // Debugbar
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

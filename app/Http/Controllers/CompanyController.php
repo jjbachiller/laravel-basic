@@ -50,7 +50,8 @@ class CompanyController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'email',
-            'logo' => 'dimensions:min_width=100,min_length=100'
+            'logo' => 'dimensions:min_width=100,min_length=100',
+            'website' => 'url'
         ]);
 
         $company = new Company([
@@ -107,7 +108,8 @@ class CompanyController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'email',
-            'logo' => 'dimensions:min_width=100,min_length=100'
+            'logo' => 'dimensions:min_width=100,min_length=100',
+            'website' => 'url'
         ]);
 
         $company = Company::find($id);
@@ -116,6 +118,7 @@ class CompanyController extends Controller
         $company->email = $request->get('email');
         $company->website = $request->get('website');
 
+        //FIXME: Borrar el logo viejo si es que tenía.
         $logo = $request->file('logo');
         if (!is_null($logo))
         {

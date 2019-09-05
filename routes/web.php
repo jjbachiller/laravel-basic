@@ -12,6 +12,10 @@
 */
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect('/home');
+    }
+
     return view('welcome');
 });
 
@@ -19,8 +23,10 @@ Auth::routes();
 
 Route::get('/home', 'CompanyController@index')->name('home');
 // Route::get('/logout', 'Auth\LoginController@logout');
-Route::resources([
-    'companies' => 'CompanyController',
-    'employees' => 'EmployeeController'
-]);
-// Route::resource('employees', 'EmployeeController');
+// Route::resources([
+//     'companies' => 'CompanyController',
+//     'employees' => 'EmployeeController'
+// ]);
+Route::resource('companies', 'CompanyController');
+Route::resource('employees', 'EmployeeController')->except(['create']);
+Route::get('employees/create/{companyId}', 'EmployeeController@create')->name('employees.create');

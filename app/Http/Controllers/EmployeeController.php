@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Employee;
+use App\Company;
 
 class EmployeeController extends Controller
 {
@@ -31,9 +32,10 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($companyId)
     {
-        return view('employees.create');
+        $company = Company::find($companyId);
+        return view('employees.create', compact('company'));
     }
 
     /**
@@ -47,6 +49,7 @@ class EmployeeController extends Controller
       $request->validate([
           'firstname' => 'required',
           'lastname' => 'required',
+          'company' => 'required',
           'email' => 'email'
       ]);
 
@@ -59,9 +62,11 @@ class EmployeeController extends Controller
           'phone' => $request->get('phone'),
       ]);
 
-      $employee->save();
+      $company = Company::find($request->get('company'));
 
-      return redirect('/employee')->with('success', 'Employee saved!');
+      $company->employees()->save($employee);
+
+      return redirect('companies.show', $company->id)->with('success', 'Employee saved!');
     }
 
     /**
