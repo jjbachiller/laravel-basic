@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'CompanyController@index')->name('home');
 // Route::get('/logout', 'Auth\LoginController@logout');
@@ -30,3 +30,4 @@ Route::get('/home', 'CompanyController@index')->name('home');
 Route::resource('companies', 'CompanyController');
 Route::resource('employees', 'EmployeeController')->except(['create']);
 Route::get('employees/create/{companyId}', 'EmployeeController@create')->name('employees.create');
+Route::get('companies/{companyId}/add-employee', 'CompanyController@loadAddNewEmployeeModal')->name('companies.add-employee-modal');

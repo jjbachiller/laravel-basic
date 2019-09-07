@@ -143,4 +143,10 @@ class CompanyController extends Controller
 
         return redirect('home')->with('succes', 'Company deleted!');
     }
+
+    public function loadAddNewEmployeeModal($companyId)
+    {
+        $company = Company::find($companyId);
+        return view('employees.forms.create', compact('company'));
+    }
 }

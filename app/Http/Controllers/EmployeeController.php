@@ -66,7 +66,8 @@ class EmployeeController extends Controller
 
       $company->employees()->save($employee);
 
-      return redirect('companies.show', $company->id)->with('success', 'Employee saved!');
+      // return redirect('companies.show', $company->id)->with('success', 'Employee saved!');
+      return redirect()->route('companies.show', $company->id)->with('success', 'Employee saved!');
     }
 
     /**
@@ -111,6 +112,12 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Employee::find($id);
+        // FIXME: No funciona el belongsTo ya que devuelve el id y no el objeto Company
+        $companyId = $employee->company;
+        $employee->delete();
+
+        return redirect()->route('companies.show', $companyId)->with('succes', 'Company deleted!');
+
     }
 }

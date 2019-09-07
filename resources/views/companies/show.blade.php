@@ -25,7 +25,7 @@
                         <br/>
                         <a href="{{ $company->website }}" target="_blank">{{ $company->website }}</a>
                         <br/>
-                        <a style="margin: 19px;" href="{{ route('employees.create', $company->id) }}" class="btn btn-primary">Add employee</a>
+                        <a style="margin: 19px;" href="{{ route('employees.create', $company->id) }}" class="btn btn-primary btn-add-employee" data-toggle="modal" data-company-id="{{ $company->id }}">Add employee</a>
 
                         <table class="table table-striped">
 
@@ -80,4 +80,25 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+    $( document ).ready(function() {
+        $('.btn-add-employee').on('click', function(){
+            var this_id = $(this).attr('data-id-company');
+            $.get("{{ route('companies.add-employee-modal', $company->id) }}", function( data ) {
+                $('#myModal').modal();
+                $('#myModal').on('shown.bs.modal', function(){
+                    $('#myModal .load_modal').html(data);
+                });
+                $('#myModal').on('hidden.bs.modal', function(){
+                    $('#myModal .modal-body').data('');
+                });
+            });
+        });
+
+        $('#myModal').on('hide', function() {
+            window.location.reload();
+        });
+    });
 @endsection
